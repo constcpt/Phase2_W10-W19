@@ -7,9 +7,20 @@
 </head>
 <body>
     <script>
+        const url = 'https://www.imooc.com/api/http/search/suggest?words=js';
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://www.imooc.com/api/http/search/suggest?words=js');
-        xhr.send();
+        xhr.addEventListener('readystatechange', () => {
+            // 如果 xhr 对象的 readyState 不等于 4，说明响应还没有接收完成，不需要做任何处理
+            if (xhr.readyState !== 4) return;
+            // 如果响应接收完成，再根据 HTTP CODE 的值来判断响应是否正常
+            if ((xhr.status >= 200) & (xhr.status < 300) || xhr.status === 304) {
+                // 在响应正常的情况下，获取响应数据
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        });
+        xhr.open('GET', url);
+        xhr.send(null);
     </script>
 </body>
 </html>
