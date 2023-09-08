@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log([1, 2][Symbol.iterator]); // ƒ values() { [native code] }，[1, 2][Symbol.iterator] 是一个方法
+        console.log([1, 2][Symbol.iterator]()); // 这个方法会返回一个对象
+        const it = [1, 2][Symbol.iterator](); // [1, 2][Symbol.iterator]() 返回一个可遍历对象，这里用 it 来表示
+        console.log(it.next()); // {value: 1, done: false}，it.next() 返回一个可遍历对象中的第一个元素，该元素有两个属性：value 和 done，value 是元素的值，done 是一个布尔值，表示是否遍历完毕
+        console.log(it.next()); // {value: 2, done: false}
+        console.log(it.next()); // {value: undefined, done: true}
+
+        const arr = [1, 2, 3];
+
+        for (const item of arr) {
+            if (item === 2) {
+                continue;
+            }
+            console.log(item); // 1 3
+        }
+
+        for (const key of arr.keys()) {
+            console.log(key); // 0 1 2
+        }
+
+        for (const value of arr.values()) {
+            console.log(value); // 1 2 3
+        }
+
+        for (const entry of arr.entries()) {
+            console.log(entry); // [0, 1] [1, 2] [2, 3]
+        }
+
+        for (const [index, value] of arr.entries()) {
+            console.log(index, value); // 0 1 1 2 2 3
+        }
+    </script>
+</body>
+</html>

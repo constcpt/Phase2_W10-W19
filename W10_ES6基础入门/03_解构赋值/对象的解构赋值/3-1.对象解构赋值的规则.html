@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3-1.对象解构赋值的规则</title>
+  </head>
+  <body>
+    <script>
+      // 1.模式（结构）匹配
+      // {}={}
+
+      // 2.属性名相同的完成赋值
+      // const { age, username } = { username: 'Alex', age: 18 }; // 简写形式，属性名对上就可以了，顺序不影响
+      const { age: age, username: username } = { username: 'Alex', age: 18 }; // 完整形式
+      // console.log(age, username); // 18 Alex
+
+      // 取别名
+      const { age: myAge, username: myUsername } = { username: 'Alex', age: 18 };
+      // console.log(age, uname); // 报错，因为没有定义
+      console.log(myAge, myUsername); // 18 Alex
+
+      //对象的解构赋值的机制是属性名先对上，是属性值和属性值完成赋值
+    </script>
+  </body>
+</html>

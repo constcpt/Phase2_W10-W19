@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Iterator 是什么</title>
+  </head>
+  <body>
+    <script>
+      // 1.Iterator 的作用
+      // Iterator：遍历器（迭代器）
+      // for()
+      // [1,2].forEach
+      // new Set().forEach
+
+      // Iterator 也是用来遍历的
+
+      // 2.寻找 Iterator
+      // console.log(Iterator);
+
+      // console.log([1, 2][Symbol.iterator]());
+      //问：这里不能通过点语法调用 Symbol.iterator 方法吗？
+      //答：不能，如果想使用点语法，则要求“点”后面的属性名写法是“合法标识符”，即属性名是由数字、字母、下划线以及 $ 构成，并且数字不能打头。而[1,2][Symbol.iterator]中，属性名是“Symbol.iterator”，它里面含有“.”，不是一个合法标识符，所以不能用点语法调用
+
+      // const it = [1, 2][Symbol.iterator]();
+      // console.log(it);
+
+      // 3.使用 Iterator
+      // const it = [1, 2][Symbol.iterator]();
+      // console.log(it.next()); // {value: 1, done: false}
+      // console.log(it.next()); // {value: 2, done: false}
+      // console.log(it.next()); // {value: undefined, done: true}
+      // console.log(it.next()); // {value: undefined, done: true}
+
+      // it：可遍历对象（可迭代对象），可遍历对象必须有一个方法：next()，next() 方法返回一个对象，该对象有两个属性：value 和 done，value 是元素的值，done 是一个布尔值，表示是否遍历完毕
+      // Symbol.iterator：可遍历对象的生成方法，意思是调用它之后会返回一个可遍历对象
+
+      // 4.什么是 Iterator？Iterator 表示一个遍历的过程，这个过程是什么样的？简而言之见下：通过 Symbol.iterator 方法调用生成一个可遍历对象，然后通过 next() 方法遍历可遍历对象，直到 done 为 true
+      // Symbol.iterator（可遍历对象的生成方法） -> it（可遍历对象） -> it.next() -> it.next() -> ...（直到 done 为 true）
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>includes()</title>
+  </head>
+
+  <body>
+    <script>
+      // 判断字符串中是否含有某些字符
+
+      // 1.基本用法
+      // console.log('abc'.includes('a'));
+      // console.log('abc'.includes('ab'));
+      // console.log('abc'.includes('bc'));
+      // console.log('abc'.includes('ac')); // false
+
+      // 2.第二个参数
+      // 表示开始搜索的位置，默认是 0
+      // console.log('abc'.includes('a'));
+      // console.log('abc'.includes('a', 0));
+      // console.log('abc'.includes('a', 1)); // false
+
+      // 3.字符串includes()方法很典型的应用场景：URL 参数拼接
+      //目标 https://coding.imooc.com/?c=fe&sort=1
+      let url = "https://coding.imooc.com";
+      const addURLParam = (url, name, value) => {
+        url += url.includes("?") ? "&" : "?";
+        url += `${name}=${value}`;
+        return url;
+      };
+      url = addURLParam(url, "c", "fe");
+      console.log(url); // https://coding.imooc.com?c=fe
+      url = addURLParam(url, "sort", "1");
+      console.log(url); // https://coding.imooc.com?c=fe&sort=1
+    </script>
+  </body>
+</html>

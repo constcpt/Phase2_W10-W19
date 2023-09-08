@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-4.练习：for...of遍历Object.entries()生成描述列表</title>
+</head>
+<body>
+    <div id="list">
+        <!--html结构参考如下：-->
+         <dl>
+             <dt>前端</dt>
+             <dd>Vue</dd>
+             <dd>Vue</dd>
+             <dd>Vue</dd>
+         </dl>
+    </div>
+    <script>
+        const list = document.getElementById("list");
+        const classfies = {
+            "前端": ["Vue", "Angular", "React"],
+            "后端": ["Php", "Java", "Python"]
+        }
+        /*补充代码*/
+        let htmlStr = "";
+        for (const [term, descriptions] of Object.entries(classfies)) {
+            htmlStr += `<dl><dt>${term}</dt>`;
+            for (const description of descriptions) {
+                htmlStr += `<dd>${description}</dd>`;
+            }
+            htmlStr += `</dl>`;
+        }
+        list.innerHTML = htmlStr;
+    </script>
+</body>
+</html>

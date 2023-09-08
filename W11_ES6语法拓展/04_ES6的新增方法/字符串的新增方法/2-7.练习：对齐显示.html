@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-7.练习：对齐显示</title>
+</head>
+<body>
+    <script>
+        const m = new Map([
+         ['apple', '10'],
+         ['strawberry', '5'],
+         ['Banana', '0']
+      ]);
+
+      for (const item of m) {
+        console.log(`${item[0].padEnd(16, '-')}Count: ${item[1].padStart(3, '0')}`);
+      }
+    </script>
+</body>
+</html>

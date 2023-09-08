@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="cn">中文</button>
+    <button id="en">English</button>
+    <script type="module">
+        import { set } from './testCookie.js';
+
+        document.getElementById('cn').addEventListener('click', () => {
+            set('lang', 'cn', { maxAge: 30 * 24 * 3600 });
+            window.location = window.location;
+        }, false);
+
+        document.getElementById('en').addEventListener('click', () => {
+            set('lang', 'en');
+            window.location = window.location;
+        }, false);
+    </script>
+</body>
+</html>

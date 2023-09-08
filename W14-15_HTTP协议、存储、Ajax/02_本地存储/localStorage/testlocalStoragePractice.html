@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="login" action="https://www.imooc.com" method="post">
+      <input type="text" name="username" id="username" />
+      <input type="password" name="password" />
+      <input type="submit" id="btn" value="登录" />
+    </form>
+
+    <script>
+      // 利用 localStorage 实现自动填充
+      const btn = document.getElementById("btn");
+      const loginForm = document.getElementById("login");
+      const usernameInput = document.getElementById("username");
+
+      // Check if username is stored in localStorage
+      if (localStorage.getItem("username")) {
+        // If it is, set the value of the username input field to the stored value
+        usernameInput.value = localStorage.getItem("username");
+      }
+
+      // Add event listener to the submit button
+      btn.addEventListener("click", function (e) {
+        // Prevent the form from submitting
+        e.preventDefault();
+        // 在这里可以做一些数据验证的工作
+
+        // Store the username in localStorage
+        localStorage.setItem("username", usernameInput.value);
+
+        // Submit the form
+        loginForm.submit();
+      });
+    </script>
+  </body>
+</html>

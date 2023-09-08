@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-6.练习：封装一个创建DOM元素的方法</title>
+</head>
+<body>
+    <script>
+        // 要求：封装一个createElement函数，根据接收的参数返回一个HTML元素，当缺少某些参数或没有传入任何参数的时候，返回一个根据默认参数设置的HTML元素
+        // 接收两个参数，第一个参数表示标签名，第二个参数表示其他配置项，是一个对象，里面存放内容和类名
+        const createElement = (tagName = 'div', {content = 'default', className = 'default'} = {}) => {
+            const ele = document.createElement(tagName);
+            ele.innerHTML = content;
+            ele.classList.add(className);
+            return ele;
+        };
+
+        console.log(createElement("a")); // <a class="default">default</a>
+        console.log(createElement("span", {
+            content: "慕课网",
+            className: "muke"
+        })); // <span class="muke">慕课网</span>
+    </script>
+</body>
+</html>

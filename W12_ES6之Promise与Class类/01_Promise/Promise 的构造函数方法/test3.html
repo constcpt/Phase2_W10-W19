@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const delay = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms);
+            });
+        };
+        const p1 = delay(1000).then(() => {
+            console.log('p1 完成了');
+
+            return 'p1';
+            // return Promise.reject('reason');
+        });
+        const p2 = delay(2000).then(() => {
+            console.log('p2 完成了');
+
+            // return 'p2';
+            return Promise.reject('reason');
+        });
+
+        // const racePromise = Promise.race([p1, p2]);
+        // racePromise.then(data => {
+        //     console.log(data);
+        // }).catch(err => {
+        //     console.log(err);
+        // });
+        // 最终控制台输出：
+        // (1秒后)
+        // p1 完成了
+        // p1
+        // (1秒后)
+        // p2 完成了
+
+        const allSettledPromise = Promise.allSettled([p1, p2]);
+        allSettledPromise.then(data => {
+            console.log('succ', data);
+        });
+        // 最终控制台输出：
+        // (1秒后)
+        // p1 完成了
+        // (1秒后)
+        // p2 完成了
+        // succ (2) [{…}, {…}]
+    </script>
+</body>
+
+</html>

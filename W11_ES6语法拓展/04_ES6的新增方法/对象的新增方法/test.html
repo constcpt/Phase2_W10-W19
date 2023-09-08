@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const apple = {
+            color: "红色",
+            shape: "圆形",
+            taste: "甜",
+        };
+        const pen = {
+            color: "黑色",
+            shape: "圆柱形",
+            use: "写字",
+        };
+
+        console.log(Object.assign(apple, pen)); // { color: '黑色', shape: '圆柱形', taste: '甜', use: '写字' }
+        console.log({...apple, ...pen }); // { color: '黑色', shape: '圆柱形', taste: '甜', use: '写字' }
+        console.log(apple); // { color: '黑色', shape: '圆柱形', taste: '甜', use: '写字' }
+        console.log(Object.assign(apple, pen) === apple); // true
+
+        // 用展开运算符合并对象，返回的是一个新对象，不会改变原对象
+        // 用 Object.assign 合并对象，返回的是传入的第一个对象，会改变原对象
+        // 想要使用 Object.assign 合并对象，但不改变原对象，可以传入一个空对象作为第一个参数
+
+        console.log(Object.assign({}, apple, pen)); // { color: '黑色', shape: '圆柱形', taste: '甜', use: '写字' }
+        console.log(Object.assign({}, apple, pen) === apple); // false
+    </script>
+</body>
+
+</html>

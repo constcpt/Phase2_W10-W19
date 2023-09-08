@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const p = new Promise((resolve, reject) => {
+        resolve({ username: "alex"});
+        reject(new Error("reason"));
+      });
+      console.log(p); 
+      // Promise {<pending>}，即 Promise 对象的状态是 pending，即未完成
+      // Promise {<fulfilled>: {username: "alex"}}，即 Promise 对象的状态是 fulfilled，即已成功
+      // Promise {<rejected>: Error: reason}，即 Promise 对象的状态是 rejected，即已失败
+
+      p.then(
+        (data) => {
+          console.log("success", data); // data 是 resolve 函数传递的参数，即 { username: "alex"}
+        },
+        (err) => {
+          console.log("error", err); // err 是 reject 函数传递的参数，即 Error 对象 Error: reason
+        }
+      );
+    </script>
+  </body>
+</html>

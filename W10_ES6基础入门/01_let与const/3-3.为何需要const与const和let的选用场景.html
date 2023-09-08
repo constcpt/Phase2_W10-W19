@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>3-2.为何需要const与const和let的选用场景</title>
+  </head>
+  <body>
+    <script>
+      // 1.为什么需要 const
+      // 只有let会遇到什么问题？
+      // let sex = 'male'; // 最初创建 sex 时不想让它被修改
+      // // ... 经过很多程序后
+      // sex = 'female'; // 不经意修改了 sex，浏览器也不会报错
+      // console.log(sex);
+
+      // 现在有了 const
+      // const sex = 'male';
+      // // ...
+      // sex = 'female'; // 尝试修改 sex，浏览器就会报错
+      // console.log(sex);
+
+      // const 就是为了那些一旦初始化就不希望重新赋值的情况设计的
+
+      // 2.const 的注意事项
+      // 2.1.使用 const 声明常量，一旦声明，就必须立即初始化，不能留到以后赋值
+      // const sex;
+      // sex='male' // 报错
+
+      // const sex = 'male'; // 正确
+
+      // 2.2.const 声明的常量，允许在不重新赋值的情况下修改它的值
+      // 基本数据类型
+      // const sex = 'male';
+      // sex = 'female'; // 报错，对于基本数据类型，没法在不重新赋值的情况下修改它的值
+
+      // 引用数据类型
+      // const person = { username: 'Alex' };
+      // person = {}; // 报错，不允许重新赋值
+      // person.username = 'ZhangSan'; // 不报错，引用数据类型不用通过重新赋值来修改它的值，可以打点调用它的属性来修改它的值
+      // console.log(person);
+
+      // 3.什么时候用 const，什么时候用 let
+      // var
+      // for (let i = 0; i < 3; i++) {}
+      // const username = 'Alex';
+      // // ...
+      // username = 'ZhangSan';
+    </script>
+  </body>
+</html>

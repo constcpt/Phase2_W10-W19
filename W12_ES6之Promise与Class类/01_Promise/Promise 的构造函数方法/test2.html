@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // const p1 = new Promise(resolve => {
+      //     setTimeout(resolve, 1000, '我执行了');
+      // });
+      // Promise.reject(p1).catch(err => console.log(err)); // Promise fulfilled
+
+      // console.log(new Promise(resolve => resolve()));
+
+      new Promise((resolve, rejcet) => {
+        resolve(123);
+      })
+        .then((data) => {
+          // 成功的状态
+          // return data;
+        //   return Promise.resolve(data);
+
+          // 失败的状态
+        //   return new Promise((resolve, reject) => {
+        //     reject("reason");
+        //   });
+        // 简写
+          return Promise.reject("reason");
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => console.log(err)); // reason
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>2-7.数组解构赋值的应用</title>
+</head>
+
+<body>
+  <p>123</p>
+  <p>321</p>
+  <p>34567</p>
+  <script>
+    // 1.常见的类数组的解构赋值，类数组：有索引，有长度，但是不是数组，典型的类数组：arguments、NodeList
+    // arguments
+    // function func() {
+    //   // console.log(arguments);
+    //   // console.log(arguments.push); // argument 是类数组，不是数组，没有 push 方法
+    //   const [a, b] = arguments;
+    //   console.log(a, b); // 1 2
+    // }
+    // func(1, 2);
+
+    // NodeList
+    // console.log(document.querySelectorAll('p')); // NodeList(3) [p, p, p]，也是类数组
+    // const [p1, p2, p3] = document.querySelectorAll('p');
+    // console.log(p1, p2, p3); // <p>123</p> <p>321</p> <p>34567</p>
+
+    // 目的：快速基于类数组创建出对应的数组，方便用数组的方法
+
+    // 2.函数参数的解构赋值（函数的形参处使用解构赋值的形式）
+    // const array = [1, 1];
+    // // const add = arr => arr[0] + arr[1]; // 不用解构赋值的写法，这里是箭头函数的简写，看不懂去回顾箭头函数那一节
+    // const add = ([x = 0, y = 0]) => x + y; // 使用解构赋值的写法，注意默认值的生效条件：只有当一个数组成员严格等于（===）undefined 时，对应的默认值才会生效
+    // // console.log(add(array));
+    // console.log(add([])); // 0
+
+    // [x,y]=[1,1]
+
+    // 3.交换变量的值
+    let x = 1;
+    let y = 2;
+    
+    // 之前的写法，引入第三个变量用于交换
+    // let tmp = x;
+    // x = y;
+    // y = tmp;
+    // console.log(x, y);
+
+    [x, y] = [y, x]; // 使用解构赋值的写法，交换变量的值，这里相当于 [x, y] = [2, 1]
+    console.log(x, y); // 2 1
+  </script>
+</body>
+
+</html>

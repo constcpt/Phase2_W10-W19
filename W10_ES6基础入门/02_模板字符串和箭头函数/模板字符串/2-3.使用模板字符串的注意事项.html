@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2-3.使用模板字符串的注意事项</title>
+  </head>
+  <body>
+    <script>
+      // 1.输出多行字符串
+      // 一般字符串
+      // const info = '第1行\n第2行'; // 必须使用转义字符 \n 才能换行
+      // console.log(info);
+
+      // 模板字符串
+      // const info = `第1行\n第2行`; // 可以使用转义字符 \n 换行
+      //       const info = `第1行
+      // 第2行`; // 也可以直接换行
+      //       console.log(info); 
+
+      // 模板字符串中，所有的空格、换行或缩进都会被保留在输出之中
+
+      // 2.输出 ` 和 \ 等特殊字符
+      // const info = `'\`\\`; // ' ` \，值得注意的是单引号 ' 不需要转义，因为对于模板字符串来说单引号不算特殊字符
+      // console.log(info);
+
+      // 3.模板字符串的注入（哪些东西可以被注入模板字符串中）
+      // ${}
+      const username = 'alex';
+      const person = { age: 18, sex: 'male' };
+      const getSex = function (sex) {
+        return sex === 'male' ? '男' : '女';
+      };
+
+      const info = `${username}, ${person.age + 2}, ${getSex(person.sex)}`;
+      console.log(info);
+
+      // 结论：只要最终可以得出一个值的就可以通过 ${} 注入到模板字符串中
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            // 一般会在构造方法中做一些初始化的操作
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            speak() {
+                console.log('speak');
+            }
+        }
+        const p = new Person('zs', 18);
+        console.log(p);
+        p.speak();
+    </script>
+</body>
+
+</html>

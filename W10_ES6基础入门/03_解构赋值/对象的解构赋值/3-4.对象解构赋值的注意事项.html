@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3-4.对象解构赋值的注意事项</title>
+  </head>
+  <body>
+    <script>
+      // 1.默认值的生效条件
+      // 对象的属性值严格等于 undefined 时，对应的默认值才会生效
+      // const { username = 'ZhangSan', age = 0 } = { username: 'alex' };
+      // console.log(username, age); // alex 0
+
+      // 2.默认值表达式
+      // 如果默认值是表达式，默认值表达式是惰性求值的
+
+      // 3.将一个已经声明的变量用于解构赋值
+      // 如果将一个已经声明的变量用于对象的解构赋值，整个赋值需在圆括号中进行
+      // let { x } = { x: 1 };
+      // console.log(x);
+
+      // let x = 2;
+      // ({ x } = { x: 1 });
+      // console.log(x); // 1
+      // [x] = [1];
+      // console.log(x);
+
+      // 4.可以取到继承的属性
+      const { a = 1} = {};
+      console.log(a); // 1
+      const { toString } = {};
+      console.log(toString); // [Function: toString]，toString是继承自Object.prototype的方法，说明对象解构赋值可以取到继承的属性
+      // Object.prototype
+      // console.log(Object.prototype);
+      console.log({}); // 打印一个空对象，可见其__proto__属性指向Object.prototype，说明空对象是继承自Object.prototype的，自然也就继承了Object.prototype上的方法
+    </script>
+  </body>
+</html>

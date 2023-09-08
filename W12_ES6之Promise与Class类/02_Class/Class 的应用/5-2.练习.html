@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Class 的应用</title>
+    <link rel="stylesheet" href="./slider.css" />
+    <style>
+        .slider {
+            position: relative;
+        }
+        /* 
+        “子绝父相”：左右按钮在样式 .slider-btn 中被设置为 position: absolute;。
+        这意味着这两个按钮会被定位相对于最近的非 static（默认）定位祖先元素。
+        */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            width: 50px;
+            height: 50px;
+            /* 设置文字垂直和水平居中：让行高等于盒子高，text-align: center */
+            line-height: 50px;
+            text-align: center;
+            font-size: 26px;
+            background-color: rgba(255, 255, 255, .5);
+            cursor: pointer;
+            border-radius: 50%;
+            font-family: Consolas;
+            /* z-index: 999; */
+            display: none;
+            color: black;
+        }
+
+        .slider-btn:hover {
+            background-color: gold;
+            color: white;
+        }
+
+        .slider-btn-left {
+            left: 10px;
+        }
+
+        .slider-btn-right {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- html结构中添加左右按钮，通过css定位到相应的位置，垂直居中显示 -->
+    <div class="slider-layout">
+
+        <div class="slider">
+            <a href="#" class="slider-btn slider-btn-left">&lt;</a>
+            <a href="#" class="slider-btn slider-btn-right">&gt;</a>
+            <div class="slider-content">
+                <div class="slider-item">
+                    <a href="javascript:;"><img src="./imgs/1.jpg" alt="1" class="slider-img" /></a>
+                </div>
+                <div class="slider-item">
+                    <a href="javascript:;"><img src="./imgs/2.jpg" alt="1" class="slider-img" /></a>
+                </div>
+                <div class="slider-item">
+                    <a href="javascript:;"><img src="./imgs/3.jpg" alt="1" class="slider-img" /></a>
+                </div>
+                <div class="slider-item">
+                    <a href="javascript:;"><img src="./imgs/4.jpg" alt="1" class="slider-img" /></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./base.js"></script>
+    <script>
+
+        class NewSlider extends BaseSlider {
+            constructor(el, options) {
+                super(el, options);
+                this.leftBtn = document.querySelector('.slider-btn-left');
+                this.rightBtn = document.querySelector('.slider-btn-right');
+                this._bindEvent();
+            }
+
+            _bindEvent() {
+                // 1. 给左右按钮绑定点击事件
+                this.leftBtn.addEventListener('click', () => {
+                    this.prev();
+                }); // 这里回调函数中的this指向需要是类的当前实例对象，所以必须用箭头函数。如果使用普通函数，this指向的是触发事件的元素，即左右按钮。
+                this.rightBtn.addEventListener('click', () => {
+                    this.next();
+                });
+                // 2. 给整个幻灯片绑定鼠标移入移出事件
+                this.slider.addEventListener('mouseenter', () => {
+                    this.leftBtn.style.display = 'block';
+                    this.rightBtn.style.display = 'block';
+                });
+                this.slider.addEventListener('mouseleave', () => {
+                    this.leftBtn.style.display = 'none';
+                    this.rightBtn.style.display = 'none';
+                });
+            }
+        }
+
+        new NewSlider(document.querySelector('.slider'), {
+            initialIndex: 1,
+            animation: true,
+            speed: 2000
+        });
+    </script>
+</body>
+
+</html>

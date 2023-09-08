@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Promise 是什么</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      #box {
+        width: 300px;
+        height: 300px;
+        background-color: red;
+        transition: all 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+
+    <script>
+      // 1.认识 Promise
+      // Promise 是异步操作的一种解决方案
+      // 回调函数是我们之前学过的异步操作的解决方案，典型的回调函数如事件处理函数，定时器函数
+      // document.addEventListener(
+      //   'click',
+      //   () => {
+      //     console.log('这里是异步的');
+      //   },
+      //   false
+      // );
+      // console.log('这里是同步的');
+
+      // 2.什么时候使用 Promise
+      // Promise 一般用来解决层层嵌套的回调函数（回调地狱 callback hell）的问题
+      // 演示回调地狱 callback hell 的问题
+      const move = (el, { x = 0, y = 0 } = {}, end = () => {}) => {
+        el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+        el.addEventListener(
+          'transitionend',
+          () => {
+            // console.log('end');
+            end();
+          },
+          false
+        );
+      };
+      const boxEl = document.getElementById('box');
+
+      document.addEventListener(
+        'click',
+        () => {
+          move(boxEl, { x: 150 }, () => {
+            move(boxEl, { x: 150, y: 150 }, () => {
+              move(boxEl, { y: 150 }, () => {
+                // console.log('object');
+                move(boxEl, { x: 0, y: 0 });
+              });
+            });
+          });
+        },
+        false
+      );
+      // 假设我们要实现一个动画效果，点击页面，盒子向右移动 150px，然后向右下移动 150px，然后向下移动 150px，最后回到原点，我们可以使用上面的层层嵌套的回调函数的方式来实现，但是这样的代码可读性很差，而且假设需求发生变更，我们需要在第二步的时候向右下移动 300px，那么我们就需要修改第三步的代码，可谓是牵一发而动全身，这样的代码维护起来非常复杂。代码可读性差，难以修改维护，这就是回调地狱 callback hell 所引发的问题。
+    </script>
+  </body>
+</html>

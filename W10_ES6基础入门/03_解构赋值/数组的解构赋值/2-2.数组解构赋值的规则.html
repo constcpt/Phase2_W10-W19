@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2-2.数组解构赋值的规则</title>
+  </head>
+  <body>
+    <script>
+      // 1.模式（结构）匹配
+      // [] = [1, 2, 3]; // 右边是数组，左边也要是数组
+
+      // 2.索引值相同的完成赋值
+      // const [a, b, c] = [1, 2, 3];
+      // console.log(a, b, c);
+
+      // 目标：取出 1，5，3
+      const [a, [, , b], c] = [1, [2, 4, 5], 3]; // 不取的，可以直接用逗号跳过，注意模式（结构）仍然要对应
+      console.log(a, b, c); // 1 5 3
+
+      const [,d] = [1, [3, 4], 5];
+      console.log(d); // [3, 4]
+    </script>
+  </body>
+</html>

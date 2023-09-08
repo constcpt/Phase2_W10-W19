@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2-4.练习：处理 url 地址结尾</title>
+  </head>
+  <body>
+    <script>
+      // 处理 url 地址结尾是是 ? 或者 & 的情况
+      let url = "https://www.imooc.com/course/list?";
+      let url1 = "https://www.imooc.com/course/list?username=xm";
+      let url2 = "https://www.imooc.com/course/list?username=xm&";
+
+      const addURLParam = (url, name, value) => {
+        // 写法一：嵌套的 if 语句使代码可读性变差
+        // if (url.includes('?') === true) {
+        //     if (url.charAt(url.length - 1) === '?') {
+        //         url += '';
+        //     } else {
+        //         url += '&';
+        //     }
+        // }
+        // else {
+        //     url += '?';
+        // }
+        // url += `${name}=${value}`;
+        // return url;
+
+        // 优化写法：尝试减少嵌套，或者提前返回结果，使得代码结构更清晰
+        if (!url.includes("?")) {
+          // 如果 URL 没有 '?', 那么添加 '?'，然后加上新的参数
+          return `${url}?${name}=${value}`;
+        }
+
+        // 如果 URL 的最后一个字符是 '?' 或者 '&', 直接加上新的参数
+        if (url.endsWith("?") || url.endsWith("&")) {
+          return `${url}${name}=${value}`;
+        }
+
+        // 其他情况，添加 '&'，然后加上新的参数
+        return `${url}&${name}=${value}`;
+
+        /*在这个优化的例子中，我们将嵌套的if语句变为了并列的条件，每个条件都有一个清晰的返回结果。这样，当满足某个条件时，函数就会直接返回结果，不再需要检查其他条件。这种方式通常可以使函数的逻辑更清晰，更易于理解和维护。*/
+      };
+      url = addURLParam(url, "password", "admin");
+      url1 = addURLParam(url1, "password", "admin");
+      url2 = addURLParam(url2, "password", "admin");
+      document.write(url, "<br>");
+      document.write(url1, "<br>");
+      document.write(url2, "<br>");
+
+      
+    </script>
+  </body>
+</html>

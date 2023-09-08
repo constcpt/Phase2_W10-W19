@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      import { set, get, remove } from './testCookie.js';
+      set('username', 'John');
+      set('username', 'LiLi');
+      set('age', 18);
+      set('用户名', '李四');
+
+      set('sex', 'male', {
+        maxAge: 60 * 60 * 24 * 7,
+      })
+
+      remove('username');
+      remove('用户名');
+
+      console.log(get('username')); // undefined
+      console.log(get('age')); // 18
+      console.log(get('用户名')); // undefined
+      console.log(get('sex')); // male
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-4_练习：localStorage实现页面访问次数统计</title>
+</head>
+<body>
+    <div>这是您第<span class="countNumber"></span>次访问本页面</div>
+    <script>
+        const span = document.querySelector('.countNumber');
+        let countNumber = parseInt(localStorage.getItem('countNumber'));
+
+        // 如果 countNumber 存在，说明之前已经访问过本页面
+        if (countNumber) {
+            localStorage.setItem('countNumber', ++countNumber);
+        }
+        else {
+            // 如果 countNumber 不存在，说明之前没有访问过本页面
+            localStorage.setItem('countNumber', 1);
+            countNumber = 1;
+        }
+
+        span.textContent = countNumber;
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Object.keys()、Object.values() 和 Object.entries()</title>
+  </head>
+  <body>
+    <script>
+      // 1.基本用法
+      const person = {
+        name: 'Alex',
+        age: 18
+      };
+
+      console.log(Object.keys(person)); // [ 'name', 'age' ]
+      console.log(Object.values(person)); // [ 'Alex', 18 ]
+      console.log(Object.entries(person)); // [ [ 'name', 'Alex' ], [ 'age', 18 ] ]
+
+      // 2.与数组类似方法的区别
+      console.log([1, 2].keys());
+      console.log([1, 2].values());
+      console.log([1, 2].entries());
+
+      // 数组的 keys()、values()、entries() 等方法是实例方法，返回的都是 Iterator
+      // 对象的 Object.keys()、Object.values()、Object.entries() 等方法是构造函数方法，返回的是数组
+
+      // 3.使用 for...of 循环遍历对象
+      // 使用 for..in 循环遍历对象，会遍历对象的所有可枚举属性，包括原型链上的属性
+      // 回想之前为了使用 for...of 遍历一个普通对象，需要让这个普通对象变为可遍历的，要手动为这个对象实现 [Symbol.iterator] 方法，非常麻烦，
+      // 但现在学了 Object.keys()、Object.values()、Object.entries() 方法，配合 for...of 就可以很方便的遍历任意普通对象了。
+      // 这种遍历方式和 for...in 比较，不会遍历原型链上的属性，只会遍历对象自身的属性
+      const person2 = {
+        name: 'Alex',
+        age: 18
+      };
+      for (const key of Object.keys(person2)) {
+        console.log(key); // name age
+      }
+      for (const value of Object.values(person2)) {
+        console.log(value); //  Alex 18
+      }
+      for (const entries of Object.entries(person2)) {
+        console.log(entries); // [ 'name', 'Alex' ] [ 'age', 18 ]
+      }
+      for (const [key, value] of Object.entries(person2)) {
+        console.log(key, value); // name Alex age 18
+      }
+
+      // Object.keys()/values()/entires() 并不能保证顺序一定是你看到的样子，这一点和 for in 是一样的
+    </script>
+  </body>
+</html>

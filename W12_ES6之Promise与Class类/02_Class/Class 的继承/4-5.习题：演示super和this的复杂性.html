@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Parent {
+            color = 'red';
+            constructor(username) {
+                this.username = username;
+            }
+
+            static pSay() {
+                console.log(this.username);
+            }
+
+            pShow() {
+                console.log(this.color);
+            }
+        }
+
+        class Child extends Parent {
+            constructor(username) {
+                super(username);
+            }
+            static cSay() {
+                super.pSay();
+            }
+
+            cShow() {
+                super.pShow();
+                console.log(super.color);
+            }
+        }
+
+        const c1 = new Child('c1');
+        Child.cSay();
+        c1.cShow();
+    </script>
+</body>
+</html>

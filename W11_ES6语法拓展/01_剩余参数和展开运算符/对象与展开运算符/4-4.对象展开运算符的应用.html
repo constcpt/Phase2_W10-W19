@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>对象展开运算符的应用</title>
+  </head>
+
+  <body>
+    <script>
+      // 1.对象的浅克隆与合并
+      const a = { x: 1, y: 2 };
+      const c = { ...a };
+      console.log(c, c === a); // {x: 1, y: 2} false
+
+      // 2.用户参数（实际传递的参数）和默认参数
+      // add(1, 2);
+
+      // 写法1：
+      // const logUser = ({
+      //   username = "ZhangSan",
+      //   age = 0,
+      //   sex = "male",
+      // } = {}) => {
+      //   console.log(username, age, sex);
+      // }; // 解构赋值的默认值 + 函数参数的默认值
+      // logUser(); // ZhangSan 0 male
+      
+      // 写法2：
+      const logUser = (userParam) => {
+        const defaultParam = {
+          username: "ZhangSan",
+          age: 0,
+          sex: "male",
+        };
+        const param = { ...defaultParam, ...userParam }; // 最终的参数就是把默认参数和用户传递的参数合并一下
+        // const param = { ...defaultParam, ...undefined} // 如果用户没有传递参数，那么userParam就是undefined，这样就相当于只有默认参数  
+        // const { username, age, sex } = { ...defaultParam, ...userParam };
+        // console.log(username, age, sex);
+        console.log(param.username, param.age, param.sex);
+      };
+      logUser(); // ZhangSan 0 male
+    </script>
+  </body>
+</html>

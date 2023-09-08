@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        2: "two",
+        "02": "two_string",
+        0: "zero",
+        1: "one",
+        "01": "one_string",
+      };
+
+      console.log("--- for...in ---");
+      for (let key in obj) {
+        console.log(key);
+      }
+
+      console.log("--- for...of with Object.keys() ---");
+      for (let key of Object.keys(obj)) {
+        console.log(key);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log([1, 5, 10, 15].find((value, index, arr) => value > 9)); // 10
+      console.log(
+        [1, 5, 10, 15].findIndex((value, index, arr) => {
+          console.log(value, index, arr);
+          return value > 9;
+        })
+      ); // 2
+
+      const students = [
+        {
+          name: "张三",
+          sex: "男",
+          age: 16,
+        },
+        {
+          name: "李四",
+          sex: "女",
+          age: 22,
+        },
+        {
+          name: "王二麻子",
+          sex: "男",
+          age: 32,
+        },
+      ];
+
+      console.log(students.find((value) => value.sex === "女")); // {name: '李四', sex: '女', age: 22}
+      console.log(students.findIndex((value) => value.sex === "女")); // 1
+    </script>
+  </body>
+</html>

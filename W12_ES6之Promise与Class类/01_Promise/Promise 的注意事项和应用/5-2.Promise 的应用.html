@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Promise 的应用：异步加载图片</title>
+  <style>
+    #img {
+      width: 80%;
+      padding: 10%;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="https://img.mukewang.com/5e6af63d00011da318720764.jpg" alt="" id="img" />
+
+  <script>
+    //需求描述：1秒后使用新的图片替换默认图片
+    //这种需求需要监听图片的加载事件，当图片加载成功后，再将图片替换为新的图片
+    //并且，如果新的图片加载失败，那就不能替换默认图片，进行相应的错误处理
+
+    
+    //异步加载图片，那就要考虑新图片加载成功后做什么，新图片加载失败后做什么
+    // 如果不使用Promise，那这里的参数除了url，还要传入代表成功做什么和失败做什么的回调函数。有了 Promise，这些逻辑在 then 和 catch 中处理
+    const loadImgAsync = url => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();// Image()函数将会创建一个新的HTMLImageElement实例。它的功能等价于 document.createElement('img')
+        img.addEventListener('load', () => {
+          resolve(img); // 图片成功加载，代表 Promise 对象的状态变为 fulfilled，调用 resolve 方法，将成功的结果传入
+        });
+        img.addEventListener('error', () => {
+          reject(new Error(`Could not load image at ${url}`)); // 图片加载失败，代表 Promise 对象的状态变为 rejected，调用 reject 方法，将失败的结果传入
+        });
+        img.src = url; // 这里的 src 是对象的属性，用来设置图片的路径
+      });
+    };
+
+    const imgDOM = document.getElementById('img');
+    loadImgAsync('https://www.apple.com/newsroom/images/partnerships/Apple-Google-partner-industry-specification-hero_inline.jpg.slideshow-xlarge_2x.jpg')
+      .then(img => { // 成功状态下的处理：1秒后使用新的图片替换原来的图片
+        console.log(img.src);
+        setTimeout(() => {
+          imgDOM.src = img.src;
+        }, 1000);
+      })
+      .catch(err => { // 失败状态下的处理：打印错误信息
+        console.log(err);
+        // 失败状态下的错误处理，这里只是简单的打印错误信息，实际项目中可能会有更复杂的处理
+        //例如：尝试再次加载图片，可能是网络问题导致加载失败；使用备用的图片源再次尝试加载图片
+      });
+  </script>
+</body>
+
+</html>

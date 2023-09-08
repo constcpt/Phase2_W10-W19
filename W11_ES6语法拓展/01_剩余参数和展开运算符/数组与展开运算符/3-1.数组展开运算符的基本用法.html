@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>数组展开运算符的基本用法</title>
+  </head>
+  <body>
+    <script>
+      // 1.认识展开运算符
+      // [3, 1, 2];
+      // Math.min
+
+      // console.log(Math.min([3, 1, 2]));
+      // console.log(Math.min(3, 1, 2));
+
+      // [3, 1, 2]->3, 1, 2
+
+      // 2.数组展开运算符的基本用法
+      console.log(Math.min(...[3, 1, 2])); // 1
+      // 相当于
+      console.log(Math.min(3, 1, 2)); // 1
+      // 展开运算符将数组转换成了参数列表的形式
+    </script>
+  </body>
+</html>

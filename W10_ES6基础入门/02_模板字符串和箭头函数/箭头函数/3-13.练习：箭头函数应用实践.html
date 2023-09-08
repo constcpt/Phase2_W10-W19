@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-13.练习：箭头函数应用实践</title>
+    <style>
+        div {
+            width: 300px;
+            margin: 20px 0;
+            line-height: 30px;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="start">开始</button>
+    <button id="stop">停止</button>
+    <div id="box"></div>
+    <script>
+        const startBtn = document.getElementById('start')
+        const stopBtn = document.getElementById('stop')
+        const box = document.getElementById('box')
+        var show = {
+            content: "Hello World",
+            timer: null,
+            start: function () {
+                // 在此补充代码
+                startBtn.addEventListener('click', () => {
+                    clearInterval(this.timer); // 设置定时器前先清除定时器，防止多次点击后定时器叠加
+                    this.timer = setInterval(() => {
+                        box.innerHTML += this.content + ' ';
+                    }, 1000)
+                })
+            },
+            stop: function () {
+                // 在此补充代码
+                stopBtn.addEventListener('click', () => {
+                    clearInterval(this.timer)
+                })
+            }
+        }
+         // 在此补充代码
+        show.start();
+        show.stop();
+    </script>
+</body>
+
+</html>

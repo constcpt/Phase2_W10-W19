@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Class 的应用</title>
+    <link rel="stylesheet" href="./slider.css" />
+  </head>
+  <body>
+    <div class="slider-layout">
+      <div class="slider">
+        <div class="slider-content">
+          <div class="slider-item">
+            <a href="javascript:;"
+              ><img src="./imgs/1.jpg" alt="1" class="slider-img"
+            /></a>
+          </div>
+          <div class="slider-item">
+            <a href="javascript:;"
+              ><img src="./imgs/2.jpg" alt="1" class="slider-img"
+            /></a>
+          </div>
+          <div class="slider-item">
+            <a href="javascript:;"
+              ><img src="./imgs/3.jpg" alt="1" class="slider-img"
+            /></a>
+          </div>
+          <div class="slider-item">
+            <a href="javascript:;"
+              ><img src="./imgs/4.jpg" alt="1" class="slider-img"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./base.js"></script>
+    <script>
+    //   console.log(BaseSlider);
+    
+    // 目标：实现一个可以用键盘左右按键控制切换的幻灯片
+    class NewSlider extends BaseSlider {
+        constructor(el, options) {
+            super(el, options);
+            this._bindEvent(); // 必须通过this调用_bindEvent方法，this不可省略，它代表当前实例对象
+        }
+        // bindEvent 方法作用是绑定键盘左右按钮按下的事件
+        _bindEvent() {
+            document.addEventListener('keyup', (e) => {
+                // console.log(e.keyCode);
+                if (e.keyCode === 37) {
+                    // 左
+                    this.prev();
+                } else if (e.keyCode === 39) {
+                    // 右
+                    this.next();
+                }
+            });
+        }
+    }
+
+    new NewSlider(document.querySelector('.slider'), {
+      initialIndex: 1,
+      animation: true,
+      speed: 1000
+    });
+    </script>
+  </body>
+</html>

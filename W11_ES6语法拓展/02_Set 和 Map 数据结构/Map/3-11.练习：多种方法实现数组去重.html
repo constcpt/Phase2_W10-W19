@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 1, '1', 17, true, true, false, false, 'true', 'a', {}, {}];
+        // 去重后结果应该为 [1, '1', 17, true, false, 'true', 'a', {}, {}]
+
+        // 方法一：使用 Set
+        const dedupedArr1 = [...new Set(arr)];
+        console.log(dedupedArr1); // [1, "1", 17, true, false, "true", "a", {…}, {…}]
+
+        // 方法二：使用 reduce
+        //一步到位
+        // const dedupedArr2 = arr.reduce((prev, cur) => prev.includes(cur) ? prev : [...prev, cur], []);
+        //写的更清晰一些
+        const dedupedArr2 = arr.reduce((accumulator, currentValue) => {
+            if (accumulator.includes(currentValue) === false) {
+                accumulator.push(currentValue);
+            }
+            return accumulator;  
+        }, []);
+        console.log(dedupedArr2); // [1, "1", 17, true, false, "true", "a", {…}, {…}]
+
+        // 方法三：使用传统的 for 循环
+        const dedupedArr3 = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (dedupedArr3.includes(arr[i]) === false) {
+                dedupedArr3.push(arr[i]);
+            }
+        }
+        console.log(dedupedArr3); // [1, "1", 17, true, false, "true", "a", {…}, {…}]
+        // 或是使用 indexOf 判断结果数组中是否包含当前项
+        const dedupedArr4 = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (dedupedArr4.indexOf(arr[i]) === -1) {
+                dedupedArr4.push(arr[i]);
+            }
+        }
+        console.log(dedupedArr4); // [1, "1", 17, true, false, "true", "a", {…}, {…}]
+
+        // 方法四：使用 filter + indexOf
+        const dedupedArr5 = arr.filter((item, index) => {
+            return arr.indexOf(item) === index;
+        });
+        console.log(dedupedArr5); // [1, "1", 17, true, false, "true", "a", {…}, {…}]
+
+    </script>
+</body>
+
+</html>

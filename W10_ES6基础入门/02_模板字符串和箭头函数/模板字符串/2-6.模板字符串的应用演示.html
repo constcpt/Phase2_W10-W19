@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>2-6.模板字符串的应用演示</title>
+  <style>
+    body {
+      padding: 50px 0 0 300px;
+      font-size: 22px;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>学生信息表</p>
+  <ul id="list">
+    <li style="list-style: none;">信息加载中……</li>
+  </ul>
+
+  <script>
+    // 准备好了数据，实际开发中数据一般是通过ajax动态的从服务器获取的
+    const students = [
+      {
+        username: 'Alex',
+        age: 18,
+        sex: 'male'
+      },
+      {
+        username: 'ZhangSan',
+        age: 28,
+        sex: 'male'
+      },
+      {
+        username: 'LiSi',
+        age: 20,
+        sex: 'female'
+      }
+    ];
+
+    const list = document.getElementById('list'); // 使用 const 声明的变量不能再次赋值，但在对象中的属性可以修改
+
+    let html = '';
+
+    for (let i = 0; i < students.length; i++) {
+      html += `<li>我的名字是：${students[i].username},${students[i].sex},${students[i].age}</li>`;
+    }
+
+    // console.log(html);
+    list.innerHTML = html; // 修改list对象的innerHTML属性，即使list是用const声明的，但因为list是对象，所以可以修改其属性
+  </script>
+</body>
+
+</html>

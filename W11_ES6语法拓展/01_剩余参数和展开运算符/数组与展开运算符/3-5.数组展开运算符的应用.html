@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>数组展开运算符的应用</title>
+  </head>
+  <body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+      // 1.复制数组
+      const a = [1, 2];
+
+      // 尝试复制数组的典型错误写法，这样复制的是数组的引用，而不是数组的值
+      const b = a;
+      a[0] = 3;
+      console.log(b);
+      // 使用展开运算符复制数组，注意本质是浅拷贝
+      const c = [...a]; // 等价于const c = [1, 2];
+      a[0] = 3;
+      console.log(a); // [3, 2]
+      console.log(c); // [1, 2]，这里的c是一个新的数组，不是a的引用
+
+      // 2.合并数组
+      // const a = [1, 2];
+      // const b = [3];
+      // const c = [4, 5];
+
+      // // console.log([...a, ...b, ...c]);
+      // // console.log([...b, ...a, ...c]);
+      // console.log([1, ...b, 2, ...a, ...c, 3]);
+
+      // 3.字符串转为字符数组
+      // 字符串可以按照数组的形式展开
+      console.log(...'alex'); // a l e x，相当于console.log('a', 'l', 'e', 'x');
+      console.log([...'alex']); // ['a', 'l', 'e', 'x']，相当于console.log('alex'.split('')); 
+      console.log('alex'.split('')); // ['a', 'l', 'e', 'x']，split方法可以把字符串按照指定的分隔符分割成数组
+
+      // 补充：为什么会有把字符串转为字符数组的需求？
+      // 因为数组有很多很好用的方法，比如reverse，于是我们可以把字符串转为数组用它的方法，用完之后再把数组转回字符串。
+      // 例如字符串 'alex' 想反转为 'xela'，思路就是先把字符串转为数组，然后调用数组的reverse方法，最后再把数组转回字符串。
+
+      // 4.常见的类数组arguments，NodeList转化为数组：[...arguments]，[...NodeList]
+      // arguments
+      function func() {
+        console.log([...arguments]); // [1, 2]
+      }
+      func(1, 2);
+
+      // NodeList
+      console.log(document.querySelectorAll('p')); // NodeList(3) [p, p, p]，这是一个类数组，不是数组
+      console.log([...document.querySelectorAll('p')].push);
+    </script>
+  </body>
+</html>

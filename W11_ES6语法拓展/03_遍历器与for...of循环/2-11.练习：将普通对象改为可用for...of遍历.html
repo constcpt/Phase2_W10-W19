@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 请将如下的对象改为可用for...of遍历的对象
+        // const obj = {
+        //     '0': "xm",
+        //     'sex': "male",
+        //     length: 2
+        // }
+
+        // obj[Symbol.iterator] = function () {
+        //     let index = 0;
+        //     return {
+        //         next: () => {
+        //             let value, done;
+        //             if (index === 0) {
+        //                 value = obj[index];
+        //                 done = false;
+        //             }else if (index === 1){
+        //                 value = obj.sex;
+        //                 done = false;
+        //             }
+        //             else if (index === 2) {
+        //                 value = obj.length;
+        //                 done = true;
+        //             }
+        //             else {
+        //                 value = undefined;
+        //                 done = true;
+        //             }
+        //             index++;
+        //             return { value, done };
+        //         }
+        //     };
+        // };
+        // for (const item of obj) {
+        //     console.log(item);
+        // }
+
+        const obj = {
+            '0': "xm",
+            'sex': "male",
+            length: 2,
+            [Symbol.iterator]: function () {
+                let index = 0;
+                const properties = Object.keys(this); // Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
+                const length = this.length; // this 指向调用该方法的对象，这里指向 obj
+
+                return {
+                    next: () => {
+                        if (index < length) {
+                            return { value: this[properties[index++]], done: false }; // 箭头函数没有自己的this，要通过查找作用域链往外层找，这里的 this 指向 obj。index++ 先返回 index，再自增
+                        } else {
+                            return { done: true };
+                        }
+                    },
+                };
+            }
+        };
+
+        for (const item of obj) {
+            console.log(item); // xm male
+        }
+
+        
+    </script>
+</body>
+
+</html>

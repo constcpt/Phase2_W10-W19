@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3-3.函数参数默认值的应用</title>
+  </head>
+  <body>
+    <script>
+      // 一个函数需要接收很多参数的时候
+
+      // 1.传统的写法，要记忆参数的顺序，麻烦不实用
+      // const logUser = (username = 'ZhangSan', age = 0, sex = 'male') => console.log(username, age, sex);
+      // logUser('Alex', 18, 'male');
+      // logUser();
+
+      // 2.现在的写法：接收一个对象作为参数
+      // const logUser = options => console.log(options.username, options.age, options.sex);
+      // logUser({
+      //   username: 'alex',
+      //   age: 18,
+      //   sex: 'male'
+      // });
+      // 利用解构赋值进一步简化上述写法，这种函数形参的写法综合了对象的解构赋值，解构赋值的默认值，函数参数的默认值的知识点。在调用函数传入对象的时候自由度很高
+      const logUser = ({ username = 'zhangsan', age = 0, sex = 'male' } = {}) => console.log(username, age, sex);
+      logUser({ username: 'alex' }); // alex 0 male
+      // 在函数参数传递时实际发生的对象的解构赋值 { username = 'zhangsan', age = 0, sex = 'male' } = { username: 'alex' }
+      logUser({}); // zhangsan 0 male
+      logUser(); // zhangsan 0 male
+      
+      // 解释为什么 logUser() 没传任何参数也能打印默认值不报错，因为给函数参数设置了默认值为一个空对象，不传参数相当于传入undefined，触发函数参数的默认值
+      // { username = 'zhangsan', age = 0, sex = 'male' } = {}
+    </script>
+  </body>
+</html>

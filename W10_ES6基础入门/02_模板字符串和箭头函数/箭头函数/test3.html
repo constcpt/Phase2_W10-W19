@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            a: 1
+        };
+
+        (function(obj) {
+            console.log(obj.a); // 1
+            obj.a = 3;
+            var obj = {
+                a: 2
+            };
+            console.log(obj.a); // 2
+        })(obj);
+        console.log(obj.a); // 3
+
+        // 上述 IIFE 的代码等价于：
+        // var obj = {
+        //     a: 1
+        // };
+
+        // (function(obj) {
+        //     var obj;
+        //     console.log(obj.a); // 1
+        //     obj.a = 3;
+        //     obj = {
+        //         a: 2
+        //     };
+        //     console.log(obj.a); // 2
+        // })(obj);
+        // console.log(obj.a); // 3
+        
+        // IIFE内即使考虑到变量声明提升，第一句console.log(obj.a)打印的也不是undefined，而是1
+        // 解释：
+        /*
+            当你在函数体内部定义一个与函数参数同名的局部变量时，虽然变量声明会被提升，但是函数参数在作用域链的解析过程中会优先被找到。
+
+            在 JavaScript 中，当查找一个变量时，解释器会从最近的作用域开始查找。首先，它会检查当前的函数作用域。如果在当前函数作用域内找不到该变量，它将查找包含（或外部）的作用域，然后是全局作用域。这个查找过程会一直持续到找到该变量，或者查找完所有的作用域链。
+
+            函数的参数是在函数作用域内定义的。因此，当解释器在函数作用域内查找一个变量时，它会首先找到函数的参数，即使你在函数内部有一个同名的 `var` 声明。
+
+            这就是为什么在你的代码中，尽管 `var obj` 的声明被提升，但 `console.log(obj.a);` 仍然打印的是函数参数 `obj` 的 `a` 属性，而不是局部变量 `obj` 的 `a` 属性。只有在局部变量 `obj` 被赋值后，它才会遮蔽同名的函数参数。
+
+            如果你没有在函数内部声明一个同名的局部变量，函数参数在整个函数作用域内都是可访问的。但是，如果你声明了一个同名的局部变量，那么在该变量被赋值之前，解释器会使用函数的参数。在该变量被赋值后，它将遮蔽函数的参数。
+        */
+
+    </script>
+</body>
+</html>

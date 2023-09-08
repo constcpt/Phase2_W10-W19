@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const logUser = (username = 'ZhangSan', age = 0, sex = 'male') => console.log(username, age, sex);
+        // logUser('Alex', 18, 'male');
+        // logUser();
+
+        const logUser = (userParam) => {
+            const defaultParam = {
+                username: 'ZhangSan',
+                age: 0,
+                sex: 'male'
+            };
+            const param = { ...defaultParam, ...userParam };
+            console.log(param.username, param.age, param.sex);
+        };
+
+        logUser();
+    </script>
+</body>
+
+</html>

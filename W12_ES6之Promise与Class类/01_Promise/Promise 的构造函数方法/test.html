@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        new Promise(resolve => resolve('foo')); // 等价于 Promise.resolve('foo');
+        Promise.resolve('foo').then(data => console.log(data)); // foo
+
+        const p1 = new Promise(resolve => {
+            setTimeout(resolve, 1000, '我执行了');
+        });
+
+        Promise.resolve(p1).then(data => console.log(data)); // 我执行了
+        // 上句代码等价于
+        p1.then(data => console.log(data)); // 我执行了
+        console.log(Promise.resolve(p1) === p1); // true，验证了 Promise.resolve() 接收的是 Promise 对象时，直接返回这个 Promise 对象，什么都不做
+
+        // 当 resolve 函数接收的是 Promise 对象时，后面的 then 会根据传递的 Promise 对象的状态变化决定执行哪一个回调
+        new Promise(resolve => resolve(p1)).then(data => console.log(data)); // 我执行了
+
+        const thenable = {
+            then(resolve, reject) {
+                console.log('then');
+                resolve('thenData');
+            }
+        };
+        Promise.resolve(thenable).then(data => console.log(data)); 
+        // then 
+        // thenData
+    </script>
+</body>
+</html>

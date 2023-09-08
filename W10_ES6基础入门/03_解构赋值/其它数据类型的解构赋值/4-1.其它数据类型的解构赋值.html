@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>其它数据类型的解构赋值</title>
+  </head>
+  <body>
+    <script>
+      // 1.字符串的解构赋值：数组形式和对象形式
+      // ''='hello' 典型错误
+      // 数组形式的解构赋值
+      // const [a, b, , , c] = 'hello';
+      // console.log(a, b, c);
+
+      // 对象形式的解构赋值
+      // const { 0: a, 1: b, length } = 'hello';
+      // console.log(a, b, length); // h e 5
+      // console.log('hello'.length); // 5
+
+      // 字符串既可以按数组形式来解构赋值，也可以按对象形式来解构赋值
+
+      // 2.数值和布尔值的解构赋值
+      // console.log(new Number(123));
+      // const { a = 1, toString } = 123;
+      // console.log(a, toString); // 1 [Function: toString]
+
+      // const { b = 2, toString } = true;
+      // console.log(b, toString); // 2 [Function: toString]
+
+      // 对数值和布尔值的解构赋值，JS会将自动将数值和布尔值转为对应包装对象，实际上还是对象的解构赋值
+
+      // 3.undefined 和 null 的解构赋值
+      // 由于 undefined 和 null 没有对应的包装对象，所以对它们进行解构赋值，都会报错
+      // const { toString } = undefined;
+      const { toString } = null;
+    </script>
+  </body>
+</html>

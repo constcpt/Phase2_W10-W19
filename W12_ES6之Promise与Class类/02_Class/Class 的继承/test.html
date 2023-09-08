@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 父类
+        class Person {
+            constructor(name, sex) {
+                this.name = name;
+                this.sex = sex;
+                this.say = function () {
+                    console.log('say');
+                };
+            }
+
+            speak() {
+                console.log('speak');
+            }
+
+            static speak() { // 静态方法
+                console.log('static speak');
+            }
+        }
+        Person.version = '1.0'; // 在类外部定义的静态属性的写法
+
+        // 子类
+        class Programmer extends Person {
+            constructor(name, sex) {
+                super(name, sex); // 调用父类的构造函数
+            }
+        }
+        const zs = new Programmer('zs', '男');
+        
+        // 实验子类到底继承了父类的哪些东西
+        console.log(zs.name);
+        console.log(zs.sex);
+        zs.say();
+        zs.speak();
+        Programmer.speak();
+        console.log(Programmer.version);
+        // 实验说明：子类继承了父类的所有属性和方法，包括静态属性和静态方法
+
+        // 子类改写继承的属性或方法
+        class TestProgrammer extends Person {
+            constructor(name, sex, feature) {
+                super(name, sex);
+                // 强调：this 操作不能放在 super 前面
+                this.feature = feature;
+            }
+
+            // 子类若有和父类同名的属性或方法，会覆盖父类的属性或方法
+            speak() {
+                console.log('TestProgrammer speak');
+            }
+
+            // 子类若有和父类同名的静态方法，会覆盖父类的静态方法 
+            static speak() {
+                console.log('TestProgrammer static speak');
+            }
+
+            // 子类可以定义自己独有的属性和方法 
+            sayHi() {
+                console.log('sayHi');
+            }
+        }
+        // 子类若有和父类同名的静态属性，会覆盖父类的静态属性
+        TestProgrammer.version = '2.0'; // 在类外部定义的静态属性的写法
+
+        const testZs = new TestProgrammer('testZs', '男', 'handsome');
+        testZs.speak(); // TestProgrammer speak
+        testZs.sayHi(); // sayHi
+        console.log(testZs.feature); // handsome
+        TestProgrammer.speak(); // TestProgrammer static speak
+        console.log(TestProgrammer.version); // 2.0
+        
+        
+        // 实验说明：
+        // 子类若有和父类同名的属性或方法，会覆盖父类的属性或方法；
+        // 子类若有和父类同名的静态属性方法，会覆盖父类的静态属性和方法；
+        // 子类可以自由定义自己独有的属性和方法
+    </script>
+</body>
+</html>

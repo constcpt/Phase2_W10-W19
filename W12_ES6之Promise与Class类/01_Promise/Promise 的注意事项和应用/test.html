@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const delay = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms);
+            });
+        };
+
+        const p1 = delay(1000).then(() => {
+            console.log('p1 完成了');
+            return Promise.reject('reason');
+        });
+        // .catch(err => {
+        //   console.log('p1', err);
+        // });
+        const p2 = delay(2000).then(() => {
+            console.log('p2 完成了');
+
+            return 'p2';
+            // return Promise.reject('reason');
+        });
+        // // .catch(err => {
+        // //   console.log('p2', err);
+        // });
+
+        const allPromise = Promise.all([p1, p2]);
+        allPromise
+            .then(datas => {
+                console.log(datas);
+            })
+            .catch(err => console.log(err));
+
+        let promise1 = Promise.reject('promise1 failed');
+        let promise2 = Promise.reject('promise2 failed');
+        let promise3 = Promise.reject('promise3 failed');
+        // console.log(Promise.any([promise1, promise2, promise3]));
+        Promise.any([promise1, promise2, promise3])
+            .then((value) => console.log(value))
+            .catch((error) => console.log(error.errors)); // 输出: ["promise1 failed", "promise2 failed", "promise3 failed"]
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let node = {
+            type: "Identifier",
+            name: "ES",
+            loc: {
+                start: ['line', 'column'],
+                end: {
+                    line: 1,
+                    column: 4
+                }
+            }
+        };
+
+        // 提取start的line，然后再提出end对象中line；
+        const { 
+            loc: { 
+                start: [value1], 
+                end: {
+                    line: value2
+                }
+            } 
+        } = node;
+        console.log(value1, value2); // line 1
+    </script>
+</body>
+</html>

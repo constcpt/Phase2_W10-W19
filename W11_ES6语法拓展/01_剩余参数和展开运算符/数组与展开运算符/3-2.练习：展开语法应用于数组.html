@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-2.练习：展开语法应用于数组</title>
+</head>
+<body>
+    <script>
+        // 创建一个空数组，在 0-100 之间随机生成 10 个数字，放入数组中
+        const arr = [];
+        for (let i = 0; i < 10; i++) {
+            arr.push(Math.floor(Math.random() * 101));
+        }
+        // 对数组进行降序排列
+        arr.sort((a, b) => b - a);
+
+        document.write(arr + '<br>');
+        document.write(`这组数中最大的数是：${Math.max(...arr)}，最小的数是：${Math.min(...arr)}`);
+
+    </script>
+</body>
+</html>

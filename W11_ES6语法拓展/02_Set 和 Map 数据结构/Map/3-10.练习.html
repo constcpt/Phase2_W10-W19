@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        const [p1, p2, p3] = document.querySelectorAll('p');
+        /*
+        const m = new Map([
+            [
+                p1,
+                {
+                    color: 'red',
+                    backgroundColor: 'yellow',
+                    fontSize: '40px'
+                }
+            ],
+            [
+                p2,
+                {
+                    color: 'green',
+                    backgroundColor: 'pink',
+                    fontSize: '40px'
+                }
+            ],
+            [
+                p3,
+                {
+                    color: 'blue',
+                    backgroundColor: 'orange',
+                    fontSize: '40px'
+                }
+            ]
+        ]);
+
+        m.forEach((propObj, elem) => {
+            for (const p in propObj) {
+                elem.style[p] = propObj[p];
+            }
+        });
+        */
+
+        // 在此补充代码
+        // version 1:
+        /*
+        const getMapFromObj = (obj) => {
+            const m = new Map();
+            for (const p in obj) {
+                m.set(p, obj[p]); // obj[p] 是方括号语法，表示取出 obj 对象中变量p对应的属性的值，典型错误写法是 obj.p，这样写表示取出 obj 对象中名为 p 的属性的值
+            }
+            return m;
+        };
+        const m = new Map([
+            [
+                p1,
+                getMapFromObj({
+                    color: 'red',
+                    backgroundColor: 'yellow',
+                    fontSize: '40px',
+                    cursor: 'pointer'
+                })
+            ],
+
+            [
+                p2,
+                getMapFromObj({
+                    color: 'green',
+                    backgroundColor: 'pink',
+                    fontSize: '40px'
+                })
+            ],
+
+            [
+                p3,
+                getMapFromObj({
+                    color: 'blue',
+                    backgroundColor: 'orange',
+                    fontSize: '40px'
+                })
+            ]
+        ]);
+
+        m.forEach((map, p) => {
+            map.forEach((v, k) => {
+                p.style[k] = v;
+            });
+        });
+        */
+
+        // version 2:
+        const getMap = (color, backgroundColor, fontSize, cursor = 'default') => {
+            return new Map([
+                ['color', color],
+                ['backgroundColor', backgroundColor],
+                ['fontSize', fontSize],
+                ['cursor', cursor]
+            ]);
+        };
+
+        const m = new Map([
+            [ p1, getMap('red', 'yellow', '40px', 'wait') ],
+            [ p2, getMap('green', 'pink', '40px') ],
+            [ p3, getMap('blue', 'orange', '40px') ]
+        ]);
+
+        m.forEach((map, p) => {
+            map.forEach((v, k) => {
+                p.style[k] = v;
+            });
+        });
+    </script>
+</body>
+
+</html>

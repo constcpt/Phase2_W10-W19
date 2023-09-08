@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person {
+            constructor(name, sex) {
+                this.name = name;
+                this.sex = sex;
+            }
+
+            speak() {
+                console.log('speak');
+            }
+
+            static speak() { // 静态方法
+                console.log('static speak');
+            }
+        }
+
+        class Programmer extends Person {
+            constructor(name, sex) {
+                super(name, sex);
+            }
+
+            sayHello() {
+                super.speak(); // 这里调用的父类的 speak 方法，到底是哪个父类的 speak 方法呢？实践证明是父类的原型上的 speak 方法，不是父类的静态方法
+            }
+            static speak() { // 静态方法
+                super.speak(); // 这里调用的父类的 speak 方法，到底是哪个父类的 speak 方法呢？实践证明是父类的静态方法
+                console.log('Programmer static speak');
+            }
+        }
+
+        const zs = new Programmer('zs', '男');
+        zs.sayHello();
+        Programmer.speak();
+    </script>
+</body>
+</html>

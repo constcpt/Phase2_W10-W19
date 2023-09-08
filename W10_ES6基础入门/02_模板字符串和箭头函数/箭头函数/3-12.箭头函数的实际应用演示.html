@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3-12.箭头函数的实际应用演示</title>
+    <style>
+      body {
+        padding: 50px 0 0 250px;
+        font-size: 30px;
+      }
+
+      #btn {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+      }
+
+      #stop {
+        width: 100px;
+        height: 100px;
+        margin-right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">开始</button>
+    <button id="stop">停止</button>
+    <span id="result">0</span>
+
+    <script>
+      const startBtn = document.getElementById('btn');
+      const result = document.getElementById('result');
+      const stopBtn = document.getElementById('stop');
+
+      // const timer = {
+      //   time: 0,
+      //   start: function () {
+      //     var that = this; // this->timer
+      //     startBtn.addEventListener(
+      //       'click',
+      //       function () {
+      //         setInterval(function () {
+      //           console.log(this); // undefined->window
+      //           // this.time++;
+      //           // result.innerHTML = this.time;
+      //           that.time++;
+      //           result.innerHTML = that.time;
+      //         }, 1000);
+      //       },
+      //       false
+      //     );
+      //   }
+      // };
+
+      const timer = {
+        time: 0,
+        intervalId: null,
+        start: function () {
+          // this -> timer
+          startBtn.addEventListener(
+            'click',
+            () => {
+              // this -> timer
+              this.intervalId = setInterval(() => {
+                console.log(this);
+                this.time++; // this -> timer
+                result.innerHTML = this.time;
+              }, 1000);
+            },
+            false
+          );
+        }
+      };
+
+      timer.start();
+    </script>
+  </body>
+</html>

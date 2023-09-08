@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-13.练习：let综合实践</title>
+    <style>
+        .active {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li data-n="HTML">HTML</li>
+        <li data-n="CSS">CSS</li>
+        <li data-n="JavaScript">JavaScript</li>
+        <li data-n="jquery">jquery</li>
+        <li data-n="HTML5">HTML5</li>
+        <li data-n="CSS3">CSS3</li>
+        <li data-n="ES6">ES6</li>
+    </ul>
+    <script>
+        let list = document.querySelector('ul');
+        let lis = document.querySelectorAll('li');
+
+        // 给每个li绑定鼠标移入，移出事件。
+        for (let i = 0; i < lis.length; i++) {
+            let lis_inner = lis[i].innerHTML; // 妙用 let 的块级作用域，先把每个li的内容存起来，后面就可以直接用了，可以不用自定义属性 data-n 了。
+            lis[i].addEventListener(
+                'mouseover',
+                function () {
+                    // 获取当前移入项的内容，增加“我是第几项”，改变字体颜色和大小
+                    let content = this.innerHTML;
+                    content = content + `我是第${i + 1}项`;
+                    this.innerHTML = content;
+                    this.classList.add('active');
+                },
+                false
+            );
+            lis[i].addEventListener(
+                'mouseout',
+                function () {
+                    // 获取当前移入项的内容，去掉“我是第几项”，恢复字体颜色和大小
+                    let content = this.innerHTML;
+                    // content = content.replace(`我是第${i + 1}项`, ''); // 字符串的replace方法，只能替换第一个匹配的内容
+                    content = this.dataset.n;
+                    // this.innerHTML = content;
+                    this.innerHTML = lis_inner;
+                    this.classList.remove('active');
+                },
+                false
+            );
+        }
+
+        // 使用事件委托来优化代码，只需要给父元素绑定一次事件，就可以实现所有子元素的事件处理
+        // list.addEventListener(
+        //     'mouseover',
+        //     function (e) {
+        //         // console.log(e.target); // e.target 是事件源，也就是触发事件的元素
+        //         if (e.target.tagName === 'LI') {
+        //             // 获取当前移入项的内容，增加“我是第几项”，改变字体颜色和大小
+        //             let content = e.target.innerHTML;
+        //             // 得到当前触发事件的元素在父元素中的索引
+        //             let index = Array.from(e.target.parentNode.children).indexOf(e.target); // Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。`.parentNode` 返回当前节点的父节点，`.children` 返回当前节点的子节点集合，是一个类数组对象，所以要用Array.from()方法转换成数组，.indexOf() 方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+        //             content = content + `我是第${index + 1}项`;
+        //             e.target.innerHTML = content;
+        //             e.target.classList.add('active');
+        //         }
+        //     },
+        //     false
+        // );
+
+        // list.addEventListener(
+        //     'mouseout',
+        //     function (e) {
+        //         // console.log(e.target); // e.target 是事件源，也就是触发事件的元素
+        //         if (e.target.tagName === 'LI') {
+        //             // 获取当前移入项的内容，去掉“我是第几项”，恢复字体颜色和大小
+        //             let content = e.target.innerHTML;
+        //             content = e.target.dataset.n;
+        //             e.target.innerHTML = content;
+        //             e.target.classList.remove('active');
+        //         }
+        //     },
+        //     false
+        // );
+    </script>
+</body>
+</html>

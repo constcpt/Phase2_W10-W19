@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>对象展开运算符的基本用法</title>
+  </head>
+  <body>
+    <script>
+      // 1.展开对象
+      // 对象不能直接展开，必须在花括号中 {} 中展开
+      // const apple = {
+      //   color: '红色',
+      //   shape: '球形',
+      //   taste: '甜'
+      // };
+      // console.log(...apple); // 报错
+      // console.log([...apple]); // 报错
+
+      // 对象的展开实际发生了：把属性罗列出来，用逗号分隔，放到一个 {} 中，构成新对象
+      // console.log({ ...apple });
+      // console.log({ ...apple } === apple); // false
+
+      // 2.合并对象
+      const apple = {
+        color: '红色',
+        shape: '球形',
+        taste: '甜'
+      };
+      const pen = {
+        color: '黑色',
+        shape: '圆柱形',
+        use: '写字'
+      };
+      // console.log({ ...apple, ...pen }); // 打印结果：{ color: '黑色', shape: '圆柱形', taste: '甜', use: '写字' }，可见合并对象相同属性后者覆盖前者，不同属性都保留
+
+      // 实验新对象拥有全部属性，相同属性，后者覆盖前者
+      // console.log({ ...pen, ...apple });
+      // 相当于
+      // console.log({
+      //   use: '写字',
+      //   color: '红色',
+      //   shape: '球形',
+      //   taste: '甜'
+      // });
+
+      console.log({ pen, apple }); // 这里的写法是ES6对象字面量的增强之对象的简洁表示法，打印结果：{pen: {…}, apple: {…}}
+      console.log({ ...pen, apple }); // {color: '黑色', shape: '圆柱形', use: '写字', apple: {…}}
+    </script>
+  </body>
+</html>

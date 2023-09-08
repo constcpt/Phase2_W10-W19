@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p = new Promise((resolve, reject) => {
+            // resolve();
+            reject();
+        });
+
+        p.then(
+            () => {
+                console.log('success');
+            },
+            () => {
+                console.log('error');
+                return 123;
+                // return new Promise((resolve) => {
+                //     resolve(123);
+                // });
+                // return new Promise((resolve, reject) => {
+                //     reject('reason');
+                // });
+            }
+        ).then(
+            (data) => {
+                console.log('success2', data);
+            },
+            (err) => {
+                console.log('error2', err);
+            }
+        ).then(
+            (data) => {
+                console.log('success3', data);
+            },
+            (err) => {
+                console.log('error3', err);
+            }
+        );
+        // error
+        // success2 123
+        // success3 undefined
+
+        
+    </script>
+</body>
+</html>

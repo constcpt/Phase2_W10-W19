@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3-2.函数参数默认值的注意事项</title>
+  </head>
+  <body>
+    <script>
+      // 1.默认值的生效条件
+      // 不传参数，或者明确的传递 undefined 作为参数，只有这两种情况下，默认值才会生效
+      const multiply = (x, y = 1) => x * y;
+      console.log(multiply(2, 0)); // 0
+      console.log(multiply(2, null)); // 0, null 在用于数学运算时会转换为数字 0
+      console.log(multiply(2, undefined)); // 2, 默认值生效
+      console.log(multiply(2)); // 和 multiply(2, undefined) 等价
+
+      // 2.默认值表达式
+      // 如果默认值是表达式，默认值表达式是惰性求值的
+
+      // 3.设置默认值的小技巧
+      // 设置函数参数的默认值时，最好从参数列表的右边开始设置，方便传参的时候不用传 undefined
+
+      // 从左边开始设置，则必须传入 undefined 才能触发默认值
+      // const multiply = (x = 1, y) => x * y;
+      // console.log(multiply(undefined, 2));
+
+      // 从右边开始设置，则不需要传入 undefined，可以直接不写那个参数就能触发默认值
+      // const multiply = (x, y = 1) => x * y;
+      // console.log(multiply(2));
+    </script>
+  </body>
+</html>

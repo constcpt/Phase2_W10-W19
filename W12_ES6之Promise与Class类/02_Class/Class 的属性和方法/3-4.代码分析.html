@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // class Person {
+        //     age = 1;
+        //     say() {
+        //         console.log(this.age);
+        //     }
+        // }
+
+        // const p = new Person();
+        // console.log(p.age); // 1
+        // p.say(); // 1
+
+        class Person {
+            constructor() {
+                this.age = 1;
+                this.say = () => {
+                    console.log(this.age);
+                }
+            }
+        }
+        const p = new Person();
+        console.log(p.age); // 1
+        p.say(); // 1
+
+    </script>
+</body>
+</html>

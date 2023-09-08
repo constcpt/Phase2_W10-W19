@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      form {
+        width: 250px;
+        margin: 10px auto;
+        text-align: center;
+      }
+      input {
+        border: 1px solid #000;
+        margin: 5px 0 10px 5px;
+      }
+      button {
+        width: 50px;
+        height: 30px;
+        border: none;
+        margin: 5px;
+        line-height: 30px;
+        border-radius:4px;
+        cursor: pointer;
+        color:#fff;
+      }
+      #signIn {
+        background: green;
+      }
+      #del {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" method="get">
+      <label for="username">用户名：</label>
+      <input type="text" placeholder="请输入用户名" id="username" />
+      <button id="signIn">登录</button>
+      <button id="del">删除</button>
+    </form>
+    <script type="module">
+        import { set, get, remove } from './js/cookie.js';
+
+        const useNameInput = document.querySelector('#username');
+        const signInBtn = document.querySelector('#signIn');
+        const delBtn = document.querySelector('#del');
+
+        //获取cookie，判断cookie是否存在，存在时候，设置输入框的值获取的cookie值
+        if (get('username') !== undefined) {
+            useNameInput.value = get('username');
+        }
+
+        // “登录”按钮绑定点击事件，添加cookie，并设置 cookie 失效时间为一周
+        signInBtn.addEventListener('click', () => {
+            set('username', useNameInput.value, { maxAge: 7 * 24 *3600 });
+        });
+
+        // “删除”按钮绑定点击事件，删除cookie
+        delBtn.addEventListener('click', () => {
+            remove('username');
+            window.location.reload();
+        });
+
+
+    </script>
+  </body>
+</html>

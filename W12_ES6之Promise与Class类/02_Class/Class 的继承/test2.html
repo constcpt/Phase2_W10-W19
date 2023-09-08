@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, sex) {
+          this.name = name;
+          this.sex = sex;
+        }
+
+        speak() {
+          // Speak 本质添加在 Person.prototype 上，Person 本质上是一个函数，它的原型是 Person.prototype
+          console.log("speak");
+        }
+      }
+      class Programmer extends Person {
+        constructor(name, sex) {
+          super(name, sex);
+          super.speak(); // 调用父类的 speak 方法，这里的 super 代表的是父类的原型 Person.prototype
+          console.log(super.name); // undefined，super 代表的是父类的原型 Person.prototype，无法访问定义在实例上的属性或方法（写在 constructor 中的属性或方法）
+        }
+      }
+      new Programmer();
+      class Parent {
+        sayHello() {
+          console.log(`Hello from Parent. Value of this.name is ${this.name}`);
+        }
+      }
+
+      class Child extends Parent {
+        constructor(name) {
+          super(); // Call parent's constructor
+          this.name = name;
+        }
+
+        sayHello() {
+          super.sayHello();
+          console.log(`Hello from Child. Value of this.name is ${this.name}`);
+        }
+      }
+
+      let child = new Child("John");
+      child.sayHello(); 
+      // Hello from Parent. Value of this.name is John
+        // Hello from Child. Value of this.name is John
+    </script>
+  </body>
+</html>

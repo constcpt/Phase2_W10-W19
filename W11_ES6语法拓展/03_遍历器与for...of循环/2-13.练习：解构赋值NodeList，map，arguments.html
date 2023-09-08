@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2-13.练习：解构赋值NodeList，map，arguments</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        // NodeList 对象
+        const list = document.querySelectorAll("li");
+        // Map 对象
+        const map = new Map([
+            ["a", 1],
+            ["b", 2],
+        ]);
+
+        const [a, b, c] = [...list];
+        // const [a, b, c] = list;
+        console.log(a, b, c); // <li>1</li> <li>2</li> <li>3</li>
+        // const [d, f] = map;
+        const [d, f] = [...map];
+        console.log(d, f); // ["a", 1] ["b", 2]
+
+        const fn = function () {
+            // arguments 对象
+            // const [g, h, i] = arguments;
+            const [g, h, i] = [...arguments];
+            console.log(g, h, i); // 1 2 3
+        };
+        fn(1, 2, 3);
+    </script>
+</body>
+
+</html>

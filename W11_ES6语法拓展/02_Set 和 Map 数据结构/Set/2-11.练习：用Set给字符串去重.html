@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-11.练习：用Set给字符串去重</title>
+</head>
+<body>
+    <script>
+        let str = "study hard and make and progress every day study"
+        const strArr = str.split(" ");
+        const strSet = new Set(strArr);
+        document.write([...strSet].join(" ")); // study hard and make progress every day，去掉了重复单词 study
+    </script>
+</body>
+</html>

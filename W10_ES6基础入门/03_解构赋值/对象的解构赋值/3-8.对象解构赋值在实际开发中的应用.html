@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>3-8.对象解构赋值在实际开发中的应用</title>
+</head>
+
+<body>
+  <script>
+    // 1.函数参数的解构赋值
+    // 写一个函数接收一个对象，目的是打印出接收的对象的属性值
+    // 传统的写法
+    // const logPersonInfo = user => console.log(user.username, user.age);
+    // logPersonInfo({ username: 'alex', age: 18 }); // alex 18
+
+    // 新的的写法：在函数的形参处使用解构赋值的形式
+    const logPersonInfo = ({ age = 0, username = 'ZhangSan' }) => console.log(username, age);
+    logPersonInfo({ age: 18 }); // ZhangSan 18
+    logPersonInfo({}); // ZhangSan 0
+    // 在传参的过程中实际发生了这样的操作 { age:age, username:username }={ username: 'alex', age: 18 }
+
+    // 2.对象的属性有复杂的嵌套，借助解构赋值可以很方便的取到想要的属性值
+    const obj = {
+      x: 1,
+      y: [2, 3, 4],
+      z: {
+        a: 5,
+        b: 6
+      }
+    };
+    // const { x, y, z } = obj; // 实验解构赋值写法，可以正常取到所有的属性值
+    // console.log(x, y, z); // 1 [ 2, 3, 4 ] { a: 5, b: 6 }
+    // 那假设上面的对象是后端返回的一个数据，我只想取到其中的某个属性值，例如属性 y 对应的数组中的第二个元素，该如何取？
+    const {
+      y,
+      y: [, yy],
+      z,
+      z: { b }
+    } = obj;
+    console.log(yy, y, z, b); // 3 [2, 3, 4] { a: 5, b: 6 } 6
+    // [, yy] = [2, 3, 4]，所以yy的值是3
+
+  //总结：当一个对象的属性很复杂，例如有数组有对象还有嵌套关系，而我们只想要取得其中的某个属性值，借助解构赋值的方式可以很方便的取到我们想要的值
+  </script>
+</body>
+
+</html>
