@@ -15,8 +15,8 @@
             // 如果响应接收完成，再根据 HTTP CODE 的值来判断响应是否正常
             if ((xhr.status >= 200) & (xhr.status < 300) || xhr.status === 304) {
                 // 在响应正常的情况下，获取响应数据
-                console.log(xhr.responseText);
-                console.log(typeof xhr.responseText);
+                console.log(xhr.responseText); // {"code":200,"data":[{"word":"jsp"},{"word":"js"},{"word":"json"},{"word":"js \u5165\u95e8"},{"word":"jstl"}]}
+                console.log(typeof xhr.responseText); // string
             }
         });
         xhr.open('GET', url);

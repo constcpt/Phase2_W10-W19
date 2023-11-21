@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-9.POSTRequestPractice</title>
+</head>
+<body>
+    <script>
+        const URL = 'https://www.imooc.com/api/http/search/suggest?words=js';
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('readystatechange', () => {
+            if (xhr.readyState !== 4) return;
+            if ((xhr.status >= 200) & (xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+            }
+        });
+
+        // 在此处添加代码
+        xhr.open('POST', URL);
+        xhr.send(`username=${encodeURIComponent('张三')}&age=18`);
+    </script>
+</body>
+</html>
