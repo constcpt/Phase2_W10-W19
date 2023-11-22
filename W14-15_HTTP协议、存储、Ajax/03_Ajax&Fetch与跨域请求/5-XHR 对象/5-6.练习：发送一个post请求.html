@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>Click</button>
+    <script>
+      // 任务：点击按钮的时候，发送一个post请求，将返回的数据打印在控制台上
+      // 步骤：设置一个按钮，并绑定点击事件。在该点击事件中
+      const btn = document.querySelector("button");
+      const URL = "https://www.imooc.com/api/http/search/suggest";
+      btn.addEventListener(
+        "click",
+        () => {
+          // 1. 创建一个XMLHttpRequest对象
+          const xhr = new XMLHttpRequest();
+
+          // 2. 监听 load 事件，并在控制台中输出响应数据。要注意的是，这里要设置正确的响应状态码
+          xhr.addEventListener(
+            "load",
+            () => {
+              if (
+                (xhr.status >= 200 && xhr.status < 300) ||
+                xhr.status === 304
+              ) {
+                console.log(xhr.response);
+              }
+            },
+            false
+          );
+
+          // 3. 建立一个POST的HTTP请求；
+          xhr.open("POST", URL, true); // true 表示异步，false 表示同步，一般都是异步，所以这里写 true，不写也可以，因为默认就是 true
+
+          // 4. 设置JSON格式的请求头
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          // 5. 发送一个对象类型的数据，对象内容为：username:'imooc'
+          xhr.send(JSON.stringify({ username: "imooc" }));
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
