@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>继发和并发</title>
+  </head>
+  <body>
+    <script>
+      // 1.使用 async/await 处理继发问题
+      function wait(ms) {
+        return new Promise(resolve => {
+          setTimeout(resolve, ms);
+        });
+      }
+      function getJSON(url) {
+        return new Promise(resolve => {
+          const xhr = new XMLHttpRequest();
+
+          xhr.addEventListener(
+            'load',
+            async () => {
+              if (
+                (xhr.status >= 200 && xhr.status < 300) ||
+                xhr.status === 304
+              ) {
+                // 模拟网络延迟
+                await wait(1000);
+                resolve(xhr.response);
+              }
+            },
+            false
+          );
+
+          xhr.open('GET', url, true);
+
+          xhr.responseType = 'json';
+
+          xhr.send(null);
+        });
+      }
+
+      // (async () => {
+      //   const url = 'https://www.imooc.com/api/http/search/suggest?words=';
+
+      //   // const result = await getJSON(`${url}js`);
+      //   // console.log(result);
+      //   const { data } = await getJSON(`${url}js`);
+      //   console.log(data);
+
+      //   const result = await getJSON(`${url}${data[0].word}`);
+      //   console.log(result);
+      // })();
+
+      // 2.使用 async/await 处理并发问题
+      // 处理异步操作时，如果不存在继发关系，最好让它们并发执行
+      // 可以先执行异步操作，再 await 等待结果
+      // 也可以通过 Promise.all 让异步操作并发执行
+      (async () => {
+        const url = 'https://www.imooc.com/api/http/search/suggest?words=';
+
+        // 继发
+        // const { data } = await getJSON(`${url}js`);
+        // console.log(data);
+        // const result = await getJSON(`${url}json`);
+        // console.log(result);
+
+        // 并发
+        // const jsPromise = getJSON(`${url}js`);
+        // const jsonPromise = getJSON(`${url}json`);
+        // const jsResult = await jsPromise;
+        // const jsonResult = await jsonPromise;
+        // console.log(jsResult, jsonResult);
+
+        // Promise.all 并发
+        // Promise.all([getJSON(`${url}js`), getJSON(`${url}json`)]).then(
+        //   datas => {
+        //     console.log(datas);
+        //   }
+        // );
+
+        const datas = await Promise.all([
+          getJSON(`${url}js`),
+          getJSON(`${url}json`)
+        ]);
+        console.log(datas);
+      })();
+    </script>
+  </body>
+</html>

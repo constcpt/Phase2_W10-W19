@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>async/await 是什么</title>
+    <style>
+      .ad {
+        display: block;
+        width: 300px;
+        height: 150px;
+        margin: 0 auto;
+      }
+      .none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="ad" src="./ad.jpg" alt="前端体系课" class="ad none" />
+
+    <script>
+      // 1.认识 async/await
+      // 是什么
+      // ES2017 新增加的两个关键字
+      // let/const
+
+      // 有什么用
+      // async 异步
+      // 可以声明一个 async 函数，表示函数里有异步操作
+      // 一般只有在 async 函数中才能使用 await
+      // function fn() {}
+      // async function fn() {}
+
+      // await 异步等待
+      // 等待一个异步操作
+      // 表示紧跟在 await 后面的是异步的，需要等待结果
+      // await 需要和 async 一起使用
+      // async function fn() {
+      //   // const result = await 异步操作（Promise 对象）
+      //   // ...
+      // }
+
+      // 为什么用
+      // 使异步（Promise）操作更简洁、更方便
+      // 使异步代码看起来像同步的，更容易理解
+
+      // 2.使用 async/await
+      // 回调函数方式
+      // function ad() {
+      //   const $ad = document.getElementById('ad');
+
+      //   setTimeout(() => {
+      //     // 显示广告
+      //     $ad.classList.remove('none');
+
+      //     setTimeout(() => {
+      //       // 隐藏广告
+      //       $ad.classList.add('none');
+
+      //       // setTimeout()
+      //     }, 2000);
+      //   }, 1000);
+      // }
+      // ad();
+
+      // Promise 方式
+      // 解决了回调地狱问题，将纵向发展的代码展开成横向的
+      // function wait(ms) {
+      //   return new Promise(resolve => {
+      //     setTimeout(resolve, ms);
+      //   });
+      // }
+      // function ad() {
+      //   const $ad = document.getElementById('ad');
+
+      //   wait(1000)
+      //     .then(() => {
+      //       // 显示广告
+      //       $ad.classList.remove('none');
+
+      //       return wait(2000);
+      //     })
+      //     .then(() => {
+      //       // 隐藏广告
+      //       $ad.classList.add('none');
+
+      //       return wait(1000);
+      //     })
+      //     .then(() => {
+      //       // 显示广告
+      //       $ad.classList.remove('none');
+
+      //       return wait(2000);
+      //     })
+      //     .then(() => {
+      //       // 隐藏广告
+      //       $ad.classList.add('none');
+      //     });
+      // }
+      // ad();
+
+      // async/await 方式
+      function wait(ms) {
+        return new Promise(resolve => {
+          setTimeout(resolve, ms);
+        });
+      }
+      async function ad() {
+        const $ad = document.getElementById('ad');
+
+        await wait(1000);
+        // 显示广告
+        $ad.classList.remove('none');
+        await wait(2000);
+        // 隐藏广告
+        $ad.classList.add('none');
+
+        await wait(1000);
+        // 显示广告
+        $ad.classList.remove('none');
+        await wait(2000);
+        // 隐藏广告
+        $ad.classList.add('none');
+      }
+      ad();
+    </script>
+  </body>
+</html>

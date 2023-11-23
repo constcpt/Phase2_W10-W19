@@ -9,6 +9,8 @@
 ## 点评
 
 - 原生 JavaScript 这里在涉及到 Promise，Ajax 部分内容质量一般。Promise 讲的晦涩难懂，Ajax 部分花了太多时间讲述使用 OOP + Promise 自行封装基于 XMLHttpRequest 的 Ajax 请求，不仅讲的非常晦涩，又在哪里会用到呢？这里花这么大篇幅完全没有意义，绝大部分开发场景都是使用 fetch 或者 axios。
+- “仿穷游”网站为什么要使用 art-template 模板引擎？为什么不使用现代化的 React、Vue、Angular 等框架？又是老套过时的技术栈
+- 总结：这几个项目真的是非常老套的技术栈，浪费时间精力，不推荐学习。
 
 ## 版权声明
 
